@@ -1,0 +1,51 @@
+name: Release Redshift
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to upload (e.g. 1.2.0)
+        required: true
+
+jobs:
+  package-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set version
+        run: echo "VERSION=${{ github.event.release.tag_name || inputs.version }}" >> "$GITHUB_ENV"
+
+      - name: Package (no git artefacts)
+        run: |
+          git archive --format=zip --prefix=Redshift/ \
+            -o "Redshift-${VERSION}.zip" HEAD
+
+      - name: Verify zip contents
+        run: |
+          unzip -l "Redshift-${VERSION}.zip"
+          if unzip -l "Redshift-${VERSION}.zip" | grep -E '\.git|\.github'; then
+            echo "Git artefacts found in zip" && exit 1
+          fi
+          unzip -l "Redshift-${VERSION}.zip" | grep -q 'Redshift/Redshift.mod' \
+            || { echo "Missing Redshift.mod" && exit 1; }
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Redshift-${{ env.VERSION }}
+          path: Redshift-${{ env.VERSION }}.zip
+
+      - name: Upload to Nexus Mods
+        if: ${{ !github.event.release.prerelease }}
+        uses: Nexus-Mods/upload-action@v1
+        with:
+          api_key: ${{ secrets.NEXUSMODS_APIKEY }}
+          file_group_id: ${{ vars.NEXUS_FILE_GROUP_ID }}
+          filename: Redshift-${{ env.VERSION }}.zip
+          version: ${{ env.VERSION }}
+          display_name: Redshift ${{ env.VERSION }}
+          file_category: main
+          description: ${{ github.event.release.body }}
