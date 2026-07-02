@@ -19,12 +19,13 @@ local OUTDOOR_BEAM = "content/fx/particles/enemies/renegade_sniper/renegade_snip
 
 local wave = {}
 
-local settings = { dot_length = 1, dot_gap = 0.5, dot_speed = 7 }
+local settings = { dot_length = 1, dot_gap = 0.5, dot_speed = 7, beam_thickness = 0.25 }
 
 function wave.refresh_settings()
 	settings.dot_length = mod:get("dot_length") or 1
 	settings.dot_gap = mod:get("dot_gap") or 0.5
 	settings.dot_speed = mod:get("dot_speed") or 7
+	settings.beam_thickness = (mod:get("beam_thickness") or 25) / 100
 end
 
 local instances = setmetatable({}, { __mode = "k" })
@@ -77,7 +78,12 @@ function wave.update(orig_update, template_data, template_context, dt, t)
 	World.set_particles_variable = function(world, id, index, value)
 		if id == particle_id and index == variable_index then
 			beam_length = value.y
-			value = Vector3(value.x, HIDDEN_LENGTH, value.z)
+			local thickness = settings.beam_thickness
+			if thickness > 0 then
+				value = Vector3(value.x * thickness, value.y, value.z * thickness)
+			else
+				value = Vector3(value.x, HIDDEN_LENGTH, value.z)
+			end
 		end
 		return orig_set(world, id, index, value)
 	end

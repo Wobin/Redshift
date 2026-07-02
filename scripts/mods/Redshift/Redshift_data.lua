@@ -27,6 +27,13 @@ return {
 				range = { 2, 20 },
 				decimals_number = 0,
 			},
+			{
+				setting_id = "beam_thickness",
+				type = "numeric",
+				default_value = 25,
+				range = { 0, 100 },
+				decimals_number = 0,
+			},
 		},
 	},
 }
