@@ -1,0 +1,8 @@
+{
+	"name": "Redshift",
+	"order": {
+		"require": ["dmf"],
+		"this_after": ["dmf"],
+		"this_before": []
+	}
+}
