@@ -1,5 +1,6 @@
 {
 	"name": "Redshift",
+	"version": "1.0",
 	"order": {
 		"require": ["dmf"],
 		"this_after": ["dmf"],
