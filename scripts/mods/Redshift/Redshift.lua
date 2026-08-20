@@ -2,12 +2,11 @@
 	Name: Redshift
 	Author: Wobin
 	URL: https://www.github.com/Wobin/Redshift
-	Date: 03/07/2026
-	Version: 1.1.0
+	Date: 19/08/2026
 ]]--
 
 local mod = get_mod("Redshift")
-mod.version = "1.1.0"
+mod.version = mod.get_metadata and mod:get_metadata("version") or "unknown"
 
 local wave = mod:io_dofile("Redshift/scripts/mods/Redshift/modules/wave")
 
@@ -91,4 +90,9 @@ end
 
 mod.on_setting_changed = function()
 	wave.refresh_settings()
+end
+
+
+mod.on_settings_reset = function()
+	mod.on_setting_changed()
 end

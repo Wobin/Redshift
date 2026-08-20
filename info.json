@@ -1,9 +1,17 @@
 {
 	"name": "Redshift",
-	"version": "1.0",
+	"description": "Turns the renegade sniper's telegraph laser into a dotted line travelling from muzzle to target so its aim direction reads at a glance.",
+	"version": "1.1.1",
+	"author": "Wobin",
+	"homepage": "https://www.nexusmods.com/warhammer40kdarktide/mods/994",
+	"source": "https://github.com/Wobin/Redshift",
+	"funding": {
+		"kofi": "https://ko-fi.com/wobin_dwonderdog"
+	},
+	"nexusId": "994",
 	"order": {
-		"require": ["dmf"],
-		"this_after": ["dmf"],
+		"require": [],
+		"this_after": [],
 		"this_before": []
 	}
 }

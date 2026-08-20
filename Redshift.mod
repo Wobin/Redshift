@@ -8,6 +8,5 @@ return {
 			mod_localization = "Redshift/scripts/mods/Redshift/Redshift_localization",
 		})
 	end,
-	version = "1.1.0",
 	packages = {},
 }
