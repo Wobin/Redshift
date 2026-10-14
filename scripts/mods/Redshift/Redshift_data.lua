@@ -17,7 +17,7 @@ return {
 				setting_id = "dot_gap",
 				type = "numeric",
 				default_value = 0.5,
-				range = { 0.2, 2 },
+				range = { 0, 2 },
 				decimals_number = 1,
 			},
 			{
@@ -33,6 +33,15 @@ return {
 				default_value = 25,
 				range = { 0, 100 },
 				decimals_number = 0,
+			},
+			{
+				setting_id = "recolour",
+				type = "checkbox",
+				default_value = false,
+				sub_widgets = {
+					{ setting_id = "beam_colour", type = "color", default_value = { 255, 255, 0, 0 }, has_alpha = false },
+					{ setting_id = "dot_colour", type = "color", default_value = { 255, 0, 255, 0 }, has_alpha = false },
+				},
 			},
 		},
 	},

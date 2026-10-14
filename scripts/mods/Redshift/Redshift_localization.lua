@@ -23,4 +23,16 @@ return {
 		en = "Underlying beam thickness (percent, 0 hides it)",
 		["zh-cn"] = "底层激光粗细（百分比，设为0则完全隐藏）"
 	},
+	recolour = {
+		en = "Custom laser colours",
+	},
+	beam_colour = {
+		en = "Beam colour",
+	},
+	dot_colour = {
+		en = "Dot colour",
+	},
+	restart_required = {
+		en = "Redshift: laser colour files changed while the game was running. Restart the game for them to take effect.",
+	},
 }
